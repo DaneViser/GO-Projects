@@ -5,11 +5,10 @@ import "fmt"
 // Solving the LeetCode 75 challange on leetcode
 // Solutions to all problems are listed below as functions
 // Structures
- type ListNode struct {
-	Val int
+type ListNode struct {
+	Val  int
 	Next *ListNode
 }
-
 
 // Functions
 func runningSum(nums []int) {
@@ -43,7 +42,7 @@ func isIsomorphic(s string, t string) bool {
 		val, exist := Hash1[s[i]]
 		if !exist {
 			Hash1[s[i]] = t[i]
-			
+
 		} else {
 			if val != t[i] {
 				return false
@@ -83,20 +82,30 @@ func isSubsequence(s string, t string) bool {
 	return false
 }
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-    if list1 == nil{
+	if list1 == nil {
 		return list2
 	}
-	if list2 == nil{
+	if list2 == nil {
 		return list1
 	}
-	if list1.Val <= list2.Val{
+	if list1.Val <= list2.Val {
 		list1.Next = mergeTwoLists(list1.Next, list2)
 		return list1
-	}else{
+	} else {
 		list2.Next = mergeTwoLists(list1, list2.Next)
 		return list2
 	}
 
+}
+func reverseList(head *ListNode) *ListNode {
+	var prev, curr *ListNode = nil, head
+	for curr != nil {
+		nxt := curr.Next
+		curr.Next = prev
+		prev = curr
+		curr = nxt
+	}
+	return prev
 }
 
 func main() {
