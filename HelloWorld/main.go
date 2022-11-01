@@ -4,6 +4,14 @@ import "fmt"
 
 // Solving the LeetCode 75 challange on leetcode
 // Solutions to all problems are listed below as functions
+// Structures
+ type ListNode struct {
+	Val int
+	Next *ListNode
+}
+
+
+// Functions
 func runningSum(nums []int) {
 	for i := 1; i < len(nums); i++ {
 		nums[i] += nums[i-1]
@@ -35,7 +43,7 @@ func isIsomorphic(s string, t string) bool {
 		val, exist := Hash1[s[i]]
 		if !exist {
 			Hash1[s[i]] = t[i]
-
+			
 		} else {
 			if val != t[i] {
 				return false
@@ -73,6 +81,22 @@ func isSubsequence(s string, t string) bool {
 		}
 	}
 	return false
+}
+func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+    if list1 == nil{
+		return list2
+	}
+	if list2 == nil{
+		return list1
+	}
+	if list1.Val <= list2.Val{
+		list1.Next = mergeTwoLists(list1.Next, list2)
+		return list1
+	}else{
+		list2.Next = mergeTwoLists(list1, list2.Next)
+		return list2
+	}
+
 }
 
 func main() {
