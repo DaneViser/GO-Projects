@@ -1,7 +1,8 @@
 package main
 
 import "fmt"
-// Solving the 14 day challange on leetcode
+
+// Solving the LeetCode 75 challange on leetcode
 // Solutions to all problems are listed below as functions
 func runningSum(nums []int) {
 	for i := 1; i < len(nums); i++ {
