@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"time"
+)
 
 // Solving the LeetCode 75 challange on leetcode
 // Solutions to all problems are listed below as functions
@@ -107,15 +110,15 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	return prev
 }
-
+func solution(){
+	
+}
 func main() {
-	s := "axc"
-	t := "ahbgdc"
-
-	if isSubsequence(s, t) {
-		fmt.Println("true")
-	} else {
-		fmt.Println("false")
-	}
+	
+	start_time := time.Now()
+	
+	solution()
+	end_time := time.Since(start_time)
+	log.Println("Program finished execution after: ", end_time.Seconds(), "seconds")
 
 }
