@@ -126,6 +126,25 @@ func middleNode(head *ListNode) *ListNode {
 	}
 	return curr
 }
+func detectCycle(head *ListNode) *ListNode {
+	
+	var visitedMap = make(map[*ListNode]int)
+	repeat := false
+	i := 0
+	for repeat != true {
+		if head == nil || head.Next == nil {
+			return nil
+		}
+		_,ok := visitedMap[head]
+		if !ok {
+			visitedMap[head] = i
+		}else{
+			return head
+		}
+		head = head.Next
+	}
+	return nil
+}
 func solution() {
 
 }
