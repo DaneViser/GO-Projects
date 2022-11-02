@@ -50,6 +50,7 @@ func isIsomorphic(s string, t string) bool {
 			if val != t[i] {
 				return false
 			}
+
 		}
 
 		val1, exist1 := Hash2[t[i]]
@@ -110,13 +111,28 @@ func reverseList(head *ListNode) *ListNode {
 	}
 	return prev
 }
-func solution(){
-	
+func middleNode(head *ListNode) *ListNode {
+	curr := head
+	num := 0
+	for curr != nil {
+		num++
+		curr = curr.Next
+	}
+	curr = head
+	index := num / 2
+
+	for i := 0; i < index; i++ {
+		curr = curr.Next
+	}
+	return curr
+}
+func solution() {
+
 }
 func main() {
-	
+
 	start_time := time.Now()
-	
+
 	solution()
 	end_time := time.Since(start_time)
 	log.Println("Program finished execution after: ", end_time.Seconds(), "seconds")
