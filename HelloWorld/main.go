@@ -7,6 +7,7 @@ import (
 
 // Solving the LeetCode 75 challange on leetcode
 // Solutions to all problems are listed below as functions
+
 // Structures
 type ListNode struct {
 	Val  int
@@ -127,7 +128,7 @@ func middleNode(head *ListNode) *ListNode {
 	return curr
 }
 func detectCycle(head *ListNode) *ListNode {
-	
+
 	var visitedMap = make(map[*ListNode]int)
 	repeat := false
 	i := 0
@@ -135,17 +136,38 @@ func detectCycle(head *ListNode) *ListNode {
 		if head == nil || head.Next == nil {
 			return nil
 		}
-		_,ok := visitedMap[head]
+		_, ok := visitedMap[head]
 		if !ok {
 			visitedMap[head] = i
-		}else{
+		} else {
 			return head
 		}
 		head = head.Next
 	}
 	return nil
 }
+func maxProfit(prices []int) int {
+	min := prices[0]
+	profit := 0
+	over_profit := 0
+	for i := 0; i < len(prices); i++ {
+		if prices[i] < min {
+			min = prices[i]
+		}
+		profit = prices[i] - min
+		if over_profit < profit {
+			over_profit = profit
+		}
+	}
+	
+	return over_profit
+}
+
 func solution() {
+	test1 := []int{7, 6, 4, 3, 1}
+	test2 := []int{7, 1, 5, 3, 6, 4}
+	log.Println(maxProfit(test1))
+	log.Println(maxProfit(test2))
 
 }
 func main() {
