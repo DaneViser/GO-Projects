@@ -1,7 +1,6 @@
 package main
 
 import (
-	
 	"log"
 	"time"
 )
@@ -14,14 +13,24 @@ type ListNode struct {
 	Val  int
 	Next *ListNode
 }
+type Node struct {
+	Val      int
+	Children []*Node
+}
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 // Helper functions
-func reverseString(str string) string{
+func reverseString(str string) string {
 	byte_str := []rune(str)
 	for i, j := 0, len(byte_str)-1; i < j; i, j = i+1, j-1 {
-	   byte_str[i], byte_str[j] = byte_str[j], byte_str[i]
+		byte_str[i], byte_str[j] = byte_str[j], byte_str[i]
 	}
 	return string(byte_str)
- }
+}
 
 // Solution functions
 func runningSum(nums []int) {
@@ -168,22 +177,65 @@ func maxProfit(prices []int) int {
 			over_profit = profit
 		}
 	}
-	
+
 	return over_profit
 }
 func longestPalindrome(s string) int {
-    char_count := [128]int{}
-	for _,c := range s {
+	char_count := [128]int{}
+	for _, c := range s {
 		char_count[c]++
 	}
 	result := 0
 	for i := 0; i < len(char_count); i++ {
 		result += char_count[i] / 2 * 2
-		if result % 2 == 0 && char_count[i] % 2 == 1 {
+		if result%2 == 0 && char_count[i]%2 == 1 {
 			result += 1
 		}
 	}
 	return result
+}
+
+func travel(root *Node, res *[]int) {
+	if root == nil {
+		return
+	}
+	*res = append(*res, root.Val)
+	for _, child := range root.Children {
+		travel(child, res)
+	}
+}
+func preorder(root *Node) []int {
+	result := []int{}
+	travel(root, &result)
+	return result
+}
+func levelOrder(root *TreeNode) [][]int {
+	final := [][]int{}
+	if root == nil {
+		return final
+	}
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+
+	for len(queue) != 0 {
+		
+		level := len(queue)	
+		adder := []int{}
+		for i := 0; i < level; i++ {
+			curr := queue[0]
+			
+			if curr.Left != nil {
+				queue = append(queue, curr.Left)
+			}
+			if curr.Right != nil {
+				queue = append(queue, curr.Right)
+			}
+			adder = append(adder, curr.Val)
+			queue = queue[1:]
+		}
+		final = append(final, adder)
+	}
+	return final
 }
 
 func solution() {
