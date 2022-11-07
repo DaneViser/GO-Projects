@@ -218,12 +218,12 @@ func levelOrder(root *TreeNode) [][]int {
 	queue = append(queue, root)
 
 	for len(queue) != 0 {
-		
-		level := len(queue)	
+
+		level := len(queue)
 		adder := []int{}
 		for i := 0; i < level; i++ {
 			curr := queue[0]
-			
+
 			if curr.Left != nil {
 				queue = append(queue, curr.Left)
 			}
@@ -236,6 +236,46 @@ func levelOrder(root *TreeNode) [][]int {
 		final = append(final, adder)
 	}
 	return final
+}
+func binary_search(nums []int, target int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+	begin, end := 0, len(nums)-1
+	mid := 0
+	for begin <= end {
+		mid = begin + (end-begin)/2
+		if nums[mid] == target {
+			return mid
+		} else if nums[mid] > target {
+			end = mid - 1
+		} else {
+			begin = mid + 1
+		}
+
+	}
+	return -1
+}
+func isBadVersion(version int) bool {
+	for i := 1; i <= version; i++ {
+		if i == version {
+			return true
+		}
+	}
+	return false
+}
+func firstBadVersion(n int) int {
+	begin, end := 1, n
+	for begin <= end {
+		mid := begin + (end - begin) / 2
+		if isBadVersion(mid) == false {
+			begin = mid + 1
+		}else {
+			end = mid - 1
+		}
+	}
+	return begin
+
 }
 
 func solution() {
