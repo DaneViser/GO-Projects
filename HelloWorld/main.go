@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"math"
 	"time"
 )
 
@@ -267,15 +268,29 @@ func isBadVersion(version int) bool {
 func firstBadVersion(n int) int {
 	begin, end := 1, n
 	for begin <= end {
-		mid := begin + (end - begin) / 2
+		mid := begin + (end-begin)/2
 		if isBadVersion(mid) == false {
 			begin = mid + 1
-		}else {
+		} else {
 			end = mid - 1
 		}
 	}
 	return begin
 
+}
+func isValid(root *TreeNode, min int, max int) bool {
+	if root == nil {
+		return true
+	}
+	if root.Val >= max || root.Val <= min {
+		return false
+	}
+	return isValid(root.Left, min, root.Val) &&
+		isValid(root.Right, root.Val, max)
+
+}
+func isValidBST(root *TreeNode) bool {
+	return isValid(root, math.MinInt, math.MaxInt)
 }
 
 func solution() {
